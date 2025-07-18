@@ -10,9 +10,6 @@
 ### Setup
 It is preferable that a virtualenv is created. 
 
-### Virtualenv
-https://docs.python.org/3/library/venv.html
-
 To create a venv run:
 ```
 $ python -m venv venv
@@ -35,7 +32,7 @@ $ pip install -r requirements.txt
 
 ### Contributing
 <p>
-  If you have a suggestion that would make this better, please fork the repo and create a pull request.
+  If you have a suggestion that would make this better, please raise and issue or fork the repo and create a pull request.
   <ol>
     <li>Fork the Project</li>
     <li>Create your feature branch (`git checkout -b feature/AmazingFeature`)</li>
