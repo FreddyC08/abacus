@@ -1,9 +1,8 @@
-import docx
 from models.document import Document
 
 
 class DocumentDao:
-    ''' Data access object for interacting with word documents '''
+    """Data access object for interacting with .docx files"""
 
     def __init__(self, file_path):
         self.document = Document(file_path)
@@ -28,18 +27,25 @@ class DocumentDao:
             paragraph = self.document.doc.paragraphs[counter]
             counter += 1
 
-            if paragraph.text.startswith('Appendix') or paragraph.text.startswith('Appendices'):
+            if paragraph.text.startswith("Appendix") or paragraph.text.startswith(
+                "Appendices"
+            ):
                 break
 
-            if not paragraph.style.name.startswith('Heading') and not paragraph.style.name.startswith('Title') and not paragraph.style.name.startswith('Subtitle') and \
-                    paragraph.text != '' and not paragraph.text.startswith('Figure'):
+            if (
+                not paragraph.style.name.startswith("Heading")
+                and not paragraph.style.name.startswith("Title")
+                and not paragraph.style.name.startswith("Subtitle")
+                and paragraph.text != ""
+                and not paragraph.text.startswith("Figure")
+            ):
                 yield paragraph
 
         for table in self.document.tables:
             for row in table.rows:
                 for cell in row.cells:
                     for paragraph in cell.paragraphs:
-                        if paragraph.text != '':
+                        if paragraph.text != "":
                             yield paragraph
 
     def set_words(self):
@@ -47,8 +53,8 @@ class DocumentDao:
             paragraph = paragraph.text
             words = paragraph.split()
             for word in words:
-                if word != ('.' or '–'):
+                if word != ("." or "–"):
                     yield word
 
     def print_word_count(self):
-        print(f'Words: {len(self.document.words)}')
+        print(f"Words: {len(self.document.words)}")
