@@ -129,3 +129,5 @@ dmypy.json
 
 # Dev test files
 test_file.docx
+temp_menu.py
+test_docs/

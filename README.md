@@ -12,17 +12,17 @@ It is preferable that a virtualenv is created.
 
 To create a venv run:
 ```
-$ python -m venv venv
+$ python -m venv .venv
 ```
 
 For Windows (using Powershell) run:
 ```
-$ venv\Scripts\Activate.ps1
+$ .venv\Scripts\Activate.ps1
 ```
 
 For Mac/Linux run:
 ```
-$ source venv/bin/activate
+$ source .venv/bin/activate
 ```
 
 ### Requirements
