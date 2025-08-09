@@ -40,7 +40,9 @@ class DocumentParser:
             counter += 1
 
             # At an appendix, stop count
-            if paragraph.text.strip().lower().startswith(("appendix", "appendices")):
+            if not self.selected_options[
+                "Appendix"
+            ] and paragraph.text.strip().lower().startswith(("appendix", "appendices")):
                 break
 
             if self.selected_options["Headers"] and (
@@ -68,13 +70,21 @@ class DocumentParser:
                     yield paragraph
 
         for table in self.document.tables:
-            for index, row in enumerate(table.rows):
-                if index == 0 and self.selected_options["Table headers"]:
-                    continue
-                if not self.selected_options["Table bodies"]:
+            if (
+                self.selected_options["Table headers"]
+                or self.selected_options["Table bodies"]
+            ):
+                for index, row in enumerate(table.rows):
+                    is_header = index == 0
+
+                    if is_header and not self.selected_options["Table headers"]:
+                        continue
+                    if not is_header and not self.selected_options["Table bodies"]:
+                        continue
+
                     for cell in row.cells:
                         for paragraph in cell.paragraphs:
-                            if paragraph.text != "":
+                            if paragraph.text.strip():
                                 yield paragraph
 
         for table in self.document.tables:
@@ -102,4 +112,4 @@ class DocumentParser:
 
     def print_word_count(self):
         print(f"Words: {len(self.document.words)}")
-        # print(f"Included words: {self.document.words}")
+        print(f"Included words: {self.document.words}")

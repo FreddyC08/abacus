@@ -15,7 +15,7 @@ if __name__ == "__main__":
         choices=[
             {"name": "Headers", "checked": False},
             {"name": "Table headers", "checked": False},
-            {"name": "Table bodies", "checked": False},
+            {"name": "Table bodies", "checked": True},
             {"name": "Captions", "checked": False},
             {"name": "References", "checked": False},
             {"name": "Appendix", "checked": False},
